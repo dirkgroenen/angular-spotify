@@ -54,7 +54,7 @@
        */
       settings.apiBase = 'https://api.spotify.com/v1';
 
-      this.$get = ['$q', '$http', '$window', function ($q, $http, $window) {
+      this.$get = ['$q', '$http', function ($q, $http) {
 
         function NgSpotify () {
           this.clientId = settings.clientId;
@@ -424,7 +424,6 @@
 
         NgSpotify.prototype.login = function () {
           var deferred = $q.defer();
-          var that = this;
 
           var w = 400,
               h = 500,
@@ -438,7 +437,7 @@
             response_type: 'code'
           };
 
-          var authWindow = window.open(
+          window.open(
             'https://accounts.spotify.com/authorize?' + this.toQueryString(params),
             'Spotify',
             'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=' + w + ',height=' + h + ',top=' + top + ',left=' + left
