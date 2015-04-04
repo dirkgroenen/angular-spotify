@@ -423,25 +423,13 @@
             'Spotify',
             'menubar=no,location=no,resizable=yes,scrollbars=yes,status=no,width=' + w + ',height=' + h + ',top=' + top + ',left=' + left
           );
+          
           /*
            * Checking the returned code is done in other servives and pages
-           * 
-          function storageChanged (e) {
-            if (e.key === 'spotify-token') {
-              if (authWindow) {
-                authWindow.close();
-              }
-
-              that.setAuthToken(e.newValue);
-              $window.removeEventListener('storage', storageChanged, false);
-              //localStorage.removeItem('spotify-token');
-
-              deferred.resolve(e.newValue);
-            }
-          }
-
-          $window.addEventListener('storage', storageChanged, false);
-          */
+           *
+           * MOPIFY: RESPONSE CHECKING IS HAPPENING IN THE SPOTIFYLOGIN SERVICE
+           */
+          
           return deferred.promise;
         };
 
