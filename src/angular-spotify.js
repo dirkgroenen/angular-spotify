@@ -21,6 +21,11 @@
         return settings.clientId;
       };
 
+      this.setAuthToken = function (accessToken) {
+        settings.accessToken = accessToken;
+        return settings.accessToken;
+      };
+
       this.setRedirectUri = function (redirectUri) {
         settings.redirectUri = redirectUri;
         return settings.redirectUri;
@@ -261,6 +266,13 @@
           });
         };
 
+        NgSpotify.prototype.reorderPlaylistTracks = function (userId, playlistId, options) {
+          return this.api('/users/' + userId + '/playlists/' + playlistId + '/tracks', 'PUT', null, options, {
+            'Authorization': 'Bearer ' + this.authToken,
+            'Content-Type': 'application/json'
+          });
+        };
+
         NgSpotify.prototype.replacePlaylistTracks = function (userId, playlistId, tracks) {
           tracks = angular.isArray(tracks) ? tracks : tracks.split(',');
           var track;
@@ -390,6 +402,14 @@
 
         NgSpotify.prototype.unfollowPlaylist = function (userId, playlistId) {
           return this.api('/users/' + userId + '/playlists/' + playlistId + '/followers', 'DELETE', null, null, {
+            'Authorization': 'Bearer ' + this.authToken
+          });
+        };
+
+        NgSpotify.prototype.playlistFollowingContains = function(userId, playlistId, ids) {
+          return this.api('/users/' + userId + '/playlists/' + playlistId + '/followers/contains', 'GET', {
+            ids: ids.toString()
+          }, null, {
             'Authorization': 'Bearer ' + this.authToken
           });
         };
